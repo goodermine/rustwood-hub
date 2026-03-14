@@ -138,7 +138,7 @@ const pillarColors: Record<string, string> = {
 const socials = [
   {
     name: "Facebook",
-    href: "https://facebook.com",
+    href: "https://www.facebook.com/share/1GPviCc9kW/?mibextid=wwXIfr",
     color: "#1877F2",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -148,7 +148,7 @@ const socials = [
   },
   {
     name: "YouTube",
-    href: "https://youtube.com",
+    href: "https://youtube.com/@rokpa?si=hOAqJApwa-E3i5Qo",
     color: "#FF0000",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -158,7 +158,7 @@ const socials = [
   },
   {
     name: "Instagram",
-    href: "https://instagram.com",
+    href: "https://www.instagram.com/rustwoodjack?igsh=MXRocGxubGhqZXdyOA%3D%3D&utm_source=qr",
     color: "#E4405F",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -168,7 +168,7 @@ const socials = [
   },
   {
     name: "TikTok",
-    href: "https://tiktok.com",
+    href: "https://www.tiktok.com/@completestrength",
     color: "#69C9D0",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
