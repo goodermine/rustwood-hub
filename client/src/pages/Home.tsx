@@ -6,6 +6,7 @@
  */
 
 import { useEffect, useRef } from "react";
+import { Link } from "wouter";
 
 // ─── Asset URLs (CDN) ───────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -25,7 +26,7 @@ const domains = [
     icon: "⚔️",
     tagline: "23+ Years of Forged Mastery",
     skills: ["Queensland & 2× Australian Kickboxing Champion", "Russian Kettlebell Pioneer in Australia", "Systema · Calisthenics · Tactical Defence"],
-    href: "#",
+    href: "/martial-arts",
   },
   {
     id: 2,
@@ -224,19 +225,72 @@ function GoldDivider() {
 // ─── Domain Card ─────────────────────────────────────────────────────────────
 function DomainCard({ domain, index }: { domain: typeof domains[0]; index: number }) {
   const pillarColor = pillarColors[domain.pillar] || "#d4a843";
+  const isPlaceholder = domain.href === "#";
+
+  const cardContent = (
+    <>
+      {/* Card image */}
+      <div className="relative h-40 overflow-hidden">
+        <img
+          src={domain.image}
+          alt={domain.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#141a28] via-[#141a28]/60 to-transparent" />
+        <div
+          className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase"
+          style={{
+            color: pillarColor,
+            border: `1px solid ${pillarColor}40`,
+            background: `${pillarColor}12`,
+            fontFamily: "'Raleway', sans-serif",
+          }}
+        >
+          {domain.pillar}
+        </div>
+        <div className="absolute bottom-3 left-4 text-2xl">{domain.icon}</div>
+        {isPlaceholder && (
+          <div className="absolute top-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase bg-[#080b12]/80 border border-[rgba(212,168,67,0.2)] text-[#8a9ab5]"
+            style={{ fontFamily: "'Raleway', sans-serif" }}>Coming Soon</div>
+        )}
+      </div>
+      <div className="p-5">
+        <h3 className="text-sm font-bold mb-1 leading-tight" style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}>
+          {domain.title}
+        </h3>
+        <p className="text-xs mb-3" style={{ color: pillarColor, fontFamily: "'Raleway', sans-serif", fontWeight: 600, letterSpacing: "0.05em" }}>
+          {domain.tagline}
+        </p>
+        <ul className="space-y-1">
+          {domain.skills.map((skill, i) => (
+            <li key={i} className="text-xs flex items-start gap-2" style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}>
+              <span style={{ color: "#d4a843", marginTop: "2px", flexShrink: 0 }}>›</span>
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="h-0.5 w-0 group-hover:w-full transition-all duration-500" style={{ background: `linear-gradient(90deg, ${pillarColor}, transparent)` }} />
+    </>
+  );
+
+  if (!isPlaceholder) {
+    return (
+      <Link href={domain.href}>
+        <div
+          className="domain-card fade-up block group cursor-pointer"
+          style={{ transitionDelay: `${(index % 5) * 60}ms` }}
+        >
+          {cardContent}
+        </div>
+      </Link>
+    );
+  }
+
   return (
-    <a
-      href={domain.href}
+    <div
       className="domain-card fade-up block group"
-      style={{
-        transitionDelay: `${(index % 5) * 60}ms`,
-        textDecoration: "none",
-      }}
-      onClick={(e) => {
-        if (domain.href === "#") {
-          e.preventDefault();
-        }
-      }}
+      style={{ transitionDelay: `${(index % 5) * 60}ms` }}
     >
       {/* Card image */}
       <div className="relative h-40 overflow-hidden">
@@ -300,7 +354,7 @@ function DomainCard({ domain, index }: { domain: typeof domains[0]; index: numbe
         className="h-0.5 w-0 group-hover:w-full transition-all duration-500"
         style={{ background: `linear-gradient(90deg, ${pillarColor}, transparent)` }}
       />
-    </a>
+    </div>
   );
 }
 
