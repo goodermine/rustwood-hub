@@ -6,7 +6,8 @@
  */
 
 import { useEffect } from "react";
-import { Link } from "wouter";
+import RustwoodNav from "@/components/RustwoodNav";
+import RustwoodFooter from "@/components/RustwoodFooter";
 
 // ─── Asset URLs ──────────────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -97,31 +98,7 @@ export default function MartialArts() {
   return (
     <div className="min-h-screen" style={{ background: "#080b12", fontFamily: "'Raleway', sans-serif" }}>
 
-      {/* ── NAV BAR ──────────────────────────────────────────────────────── */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4"
-        style={{ background: "rgba(8,11,18,0.92)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(212,168,67,0.12)" }}
-      >
-        <Link href="/">
-          <div className="flex items-center gap-3 cursor-pointer group">
-            <img src={LOGO_URL} alt="Rustwood" className="w-9 h-9 object-contain" style={{ filter: "drop-shadow(0 0 6px rgba(79,195,247,0.3))" }} />
-            <div>
-              <div className="text-xs font-bold tracking-widest uppercase" style={{ fontFamily: "'Cinzel', serif", color: "#d4a843" }}>Rustwood</div>
-              <div className="text-[10px] tracking-widest uppercase" style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}>Aaron Ellis</div>
-            </div>
-          </div>
-        </Link>
-        <Link href="/">
-          <div
-            className="flex items-center gap-2 text-xs tracking-widest uppercase cursor-pointer transition-colors duration-300"
-            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "#d4a843")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "#8a9ab5")}
-          >
-            <span style={{ fontSize: "16px" }}>←</span> All Domains
-          </div>
-        </Link>
-      </nav>
+      <RustwoodNav />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[70vh] flex flex-col items-center justify-end pb-20 overflow-hidden pt-20">
@@ -404,20 +381,7 @@ export default function MartialArts() {
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────────────────────────────── */}
-      <footer className="py-10 px-4 text-center" style={{ background: "#080b12", borderTop: "1px solid rgba(212,168,67,0.1)" }}>
-        <Link href="/">
-          <div className="inline-flex flex-col items-center gap-2 cursor-pointer group">
-            <img src={LOGO_URL} alt="Rustwood" className="w-12 h-12 object-contain opacity-70 group-hover:opacity-100 transition-opacity" />
-            <span className="text-xs tracking-widest uppercase" style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}>
-              ← Back to Rustwood Hub
-            </span>
-          </div>
-        </Link>
-        <p className="mt-6 text-xs" style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}>
-          © {new Date().getFullYear()} Aaron Ellis · Rustwood
-        </p>
-      </footer>
+      <RustwoodFooter />
     </div>
   );
 }

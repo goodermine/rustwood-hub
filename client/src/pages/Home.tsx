@@ -7,6 +7,7 @@
 
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
+import RustwoodNav from "@/components/RustwoodNav";
 
 // ─── Asset URLs (CDN) ───────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -369,6 +370,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen" style={{ background: "#080b12", fontFamily: "'Raleway', sans-serif" }}>
+      <RustwoodNav />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
@@ -477,6 +479,32 @@ export default function Home() {
               />
             </div>
           </button>
+        </div>
+      </section>
+
+      {/* ── ABOUT AARON ──────────────────────────────────────────────── */}
+      <section className="py-24 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-2xl mx-auto text-center fade-up">
+          <p
+            className="text-xs tracking-[0.4em] uppercase mb-4"
+            style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 700 }}
+          >
+            The Man Behind the Sigil
+          </p>
+          <h2
+            className="text-2xl md:text-3xl font-bold mb-6"
+            style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}
+          >
+            About Aaron
+          </h2>
+          <div className="gold-divider mb-8"><div className="gold-divider-diamond" /></div>
+          <p
+            className="text-base md:text-lg leading-relaxed"
+            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 400, maxWidth: "660px", margin: "0 auto" }}
+          >
+            Aaron Ellis — known through the Rustwood identity — has spent decades exploring the disciplines that shape human capability: martial arts, voice, mindset, technology, and creative expression. His work blends traditional training with modern tools, guiding people toward greater strength, clarity, and confidence. The Rustwood Sigil acts as a central emblem for these paths of mastery. From here, each domain reveals a different craft within that journey.
+          </p>
+          <div className="gold-divider mt-10"><div className="gold-divider-diamond" /></div>
         </div>
       </section>
 
