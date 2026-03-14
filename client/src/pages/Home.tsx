@@ -46,7 +46,7 @@ const domains = [
     icon: "🎚️",
     tagline: "Technical Mastery of Sound",
     skills: ["Mixing & vocal processing", "Karaoke system engineering", "Voice cloning technologies"],
-    href: "#",
+    href: "/audio-engineering",
   },
   {
     id: 4,
@@ -66,7 +66,7 @@ const domains = [
     icon: "🧠",
     tagline: "Rewiring the Subconscious",
     skills: ["Hypnotherapy practice", "Mental conditioning & behaviour change", "Performance psychology"],
-    href: "#",
+    href: "/hypnotherapy",
   },
   {
     id: 6,
@@ -76,7 +76,7 @@ const domains = [
     icon: "🏆",
     tagline: "Elevating Human Potential",
     skills: ["Martial arts & strength coaching", "Vocal improvement coaching", "AI education & mentoring"],
-    href: "#",
+    href: "/coaching",
   },
   {
     id: 7,
@@ -86,7 +86,7 @@ const domains = [
     icon: "🤝",
     tagline: "Helping People Thrive",
     skills: ["Independent support worker", "Emotional support & life assistance", "Problem-solving for vulnerable individuals"],
-    href: "#",
+    href: "/human-support",
   },
   {
     id: 8,
@@ -96,7 +96,7 @@ const domains = [
     icon: "🔥",
     tagline: "Building Systems & Ventures",
     skills: ["Grit & Groove Karaoke", "AI consulting & prompt products", "Future karaoke bar vision"],
-    href: "#",
+    href: "/entrepreneurship",
   },
   {
     id: 9,
@@ -106,7 +106,7 @@ const domains = [
     icon: "✍️",
     tagline: "Myth-Maker · Brand Architect",
     skills: ["Songwriting & rap writing", "Personal branding & content creation", "Mythic identity (Rustwood)"],
-    href: "#",
+    href: "/creativity",
   },
   {
     id: 10,
@@ -116,7 +116,7 @@ const domains = [
     icon: "🌌",
     tagline: "Explorer of the Unseen",
     skills: ["Remote viewing exploration", "Meditation & consciousness study", "Energy systems & higher intelligence"],
-    href: "#",
+    href: "/philosophy",
   },
 ];
 
