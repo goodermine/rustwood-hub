@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import MartialArts from "./pages/MartialArts";
 import Music from "./pages/Music";
+import AITechnology from "./pages/AITechnology";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/martial-arts"} component={MartialArts} />
       <Route path={"/music"} component={Music} />
+      <Route path={"/ai-technology"} component={AITechnology} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

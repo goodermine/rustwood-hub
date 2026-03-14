@@ -56,7 +56,7 @@ const domains = [
     icon: "🤖",
     tagline: "Prompt Engineer · AI Architect",
     skills: ["Multi-agent AI orchestration", "Local LLM experimentation", "AI business automation"],
-    href: "#",
+    href: "/ai-technology",
   },
   {
     id: 5,
