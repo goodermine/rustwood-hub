@@ -1,3 +1,10 @@
+/*
+ * RUSTWOOD HUB — Global Theme
+ * Design: "Rustwood Sigil" — Dark Fantasy Codex / Mythic Emblem Page
+ * Palette: Abyss black (#080b12), Shadow steel (#141a28), Ancient gold (#d4a843), Arcane blue (#4fc3f7)
+ * Typography: Cinzel (display authority) + Raleway (elegant body)
+ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -40,77 +47,54 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Rustwood brand tokens */
+  --gold: #d4a843;
+  --gold-light: #f0c96a;
+  --gold-dim: #8a6a1e;
+  --arcane: #4fc3f7;
+  --arcane-dim: #1a5f7a;
+  --abyss: #080b12;
+  --deep-slate: #0f1420;
+  --shadow-steel: #141a28;
+  --vellum: #f0ead8;
+  --slate-mist: #8a9ab5;
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --radius: 0.5rem;
+  --background: #080b12;
+  --foreground: #f0ead8;
+  --card: #141a28;
+  --card-foreground: #f0ead8;
+  --popover: #0f1420;
+  --popover-foreground: #f0ead8;
+  --primary: #d4a843;
+  --primary-foreground: #080b12;
+  --secondary: #1a2035;
+  --secondary-foreground: #8a9ab5;
+  --muted: #0f1420;
+  --muted-foreground: #8a9ab5;
+  --accent: #4fc3f7;
+  --accent-foreground: #080b12;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
-}
-
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --border: rgba(212, 168, 67, 0.15);
+  --input: rgba(212, 168, 67, 0.1);
+  --ring: #d4a843;
+  --chart-1: #d4a843;
+  --chart-2: #4fc3f7;
+  --chart-3: #8a9ab5;
+  --chart-4: #f0ead8;
+  --chart-5: #1a2035;
+  --sidebar: #0f1420;
+  --sidebar-foreground: #f0ead8;
+  --sidebar-accent: #141a28;
+  --sidebar-accent-foreground: #f0ead8;
+  --sidebar-border: rgba(212, 168, 67, 0.15);
+  --sidebar-ring: #d4a843;
+  --sidebar-primary: #d4a843;
+  --sidebar-primary-foreground: #080b12;
 }
 
 @layer base {
@@ -119,59 +103,173 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Raleway', sans-serif;
+    background-color: #080b12;
+    color: #f0ead8;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Cinzel', serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
+  a[href] {
     @apply cursor-pointer;
   }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
-
   .flex {
     min-height: 0;
     min-width: 0;
   }
-
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
-
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
+
+  /* Gold divider with diamond */
+  .gold-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+  .gold-divider::before,
+  .gold-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4a843 60%, transparent);
+  }
+  .gold-divider-diamond {
+    width: 8px;
+    height: 8px;
+    background: #d4a843;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px #d4a843;
+  }
+
+  /* Domain card base */
+  .domain-card {
+    position: relative;
+    background: #141a28;
+    border: 1px solid rgba(212, 168, 67, 0.2);
+    transition: all 0.35s ease;
+    overflow: hidden;
+  }
+  .domain-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, rgba(212,168,67,0.4), rgba(79,195,247,0.2), transparent 60%) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .domain-card:hover::before {
+    opacity: 1;
+  }
+  .domain-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 168, 67, 0.5);
+    box-shadow: 0 8px 40px rgba(212, 168, 67, 0.15), 0 0 20px rgba(79, 195, 247, 0.08);
+  }
+
+  /* Grain texture overlay */
+  .grain-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: 1;
+  }
+
+  /* Pillar badge */
+  .pillar-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(212, 168, 67, 0.4);
+    background: rgba(212, 168, 67, 0.06);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #d4a843;
+    transition: all 0.3s ease;
+  }
+  .pillar-badge:hover {
+    background: rgba(212, 168, 67, 0.12);
+    border-color: rgba(212, 168, 67, 0.7);
+    box-shadow: 0 0 12px rgba(212, 168, 67, 0.2);
+  }
+
+  /* Social icon button */
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid rgba(212, 168, 67, 0.3);
+    background: rgba(212, 168, 67, 0.05);
+    color: #8a9ab5;
+    transition: all 0.3s ease;
+  }
+  .social-btn:hover {
+    border-color: #d4a843;
+    color: #d4a843;
+    background: rgba(212, 168, 67, 0.1);
+    box-shadow: 0 0 16px rgba(212, 168, 67, 0.25);
+    transform: translateY(-2px);
+  }
+
+  /* Scroll animation helpers */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated geometric background */
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes float-up {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
