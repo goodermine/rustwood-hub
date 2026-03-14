@@ -36,7 +36,7 @@ const domains = [
     icon: "🎤",
     tagline: "Singer · Songwriter · Stage Performer",
     skills: ["Vocal technique & coaching", "Karaoke host & performer", "Rap lyricist · AI music creation"],
-    href: "#",
+    href: "/music",
   },
   {
     id: 3,
