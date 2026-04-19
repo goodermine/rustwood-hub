@@ -1,13 +1,15 @@
 /*
- * RUSTWOOD HUB — Home Page
+ * RUSTWOOD HUB — Home Page (Marketing Framework Update)
  * Design: "Rustwood Sigil" — Dark Fantasy Codex / Mythic Emblem Page
- * Sections: Hero → Pillars → Domains (10 cards) → Footer with socials
- * Domain cards: placeholder links, will connect to dedicated pages later
+ * Sections: Hero → About → Achievement Stats → Forge Coaching → Domains → Newsletter → Grit & Groove → Identity → Footer
  */
 
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 import RustwoodNav from "@/components/RustwoodNav";
+import NewsletterSignup from "@/components/NewsletterSignup";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { toast } from "sonner";
 
 // ─── Asset URLs (CDN) ───────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -25,8 +27,8 @@ const domains = [
     pillar: "Body",
     image: MARTIAL_URL,
     icon: "⚔️",
-    tagline: "23+ Years of Forged Mastery",
-    skills: ["Queensland & 2× Australian Kickboxing Champion", "Russian Kettlebell Pioneer in Australia", "Systema · Calisthenics · Tactical Defence"],
+    tagline: "Forge Your Body Into a Weapon of Calm Power",
+    skills: ["Queensland & 2× Australian ISKA Kickboxing Champion", "Russian Kettlebell Pioneer in Australia", "Systema · Calisthenics · Tactical Defence"],
     href: "/martial-arts",
   },
   {
@@ -35,8 +37,8 @@ const domains = [
     pillar: "Voice",
     image: MUSIC_URL,
     icon: "🎤",
-    tagline: "Singer · Songwriter · Stage Performer",
-    skills: ["Vocal technique & coaching", "Karaoke host & performer", "Rap lyricist · AI music creation"],
+    tagline: "Find Your Voice. Command the Room.",
+    skills: ["Vocal technique & coaching", "Grit & Groove Karaoke host", "Rap lyricist · AI music creation"],
     href: "/music",
   },
   {
@@ -45,7 +47,7 @@ const domains = [
     pillar: "Voice",
     image: MUSIC_URL,
     icon: "🎚️",
-    tagline: "Technical Mastery of Sound",
+    tagline: "Shape Sound with Precision and Intent",
     skills: ["Mixing & vocal processing", "Karaoke system engineering", "Voice cloning technologies"],
     href: "/audio-engineering",
   },
@@ -55,8 +57,8 @@ const domains = [
     pillar: "Intelligence",
     image: AI_URL,
     icon: "🤖",
-    tagline: "Prompt Engineer · AI Architect",
-    skills: ["Multi-agent AI orchestration", "Local LLM experimentation", "AI business automation"],
+    tagline: "Orchestrate AI. Amplify Everything.",
+    skills: ["Multi-agent AI orchestration", "Prompt engineering mastery", "AI business automation"],
     href: "/ai-technology",
   },
   {
@@ -65,8 +67,8 @@ const domains = [
     pillar: "Mind",
     image: MIND_URL,
     icon: "🧠",
-    tagline: "Rewiring the Subconscious",
-    skills: ["Hypnotherapy practice", "Mental conditioning & behaviour change", "Performance psychology"],
+    tagline: "Rewire Your Mind. Unlock What's Held You Back.",
+    skills: ["8 years hypnotherapy practice", "Mental conditioning & behaviour change", "Performance psychology"],
     href: "/hypnotherapy",
   },
   {
@@ -75,7 +77,7 @@ const domains = [
     pillar: "Mind",
     image: MARTIAL_URL,
     icon: "🏆",
-    tagline: "Elevating Human Potential",
+    tagline: "Decades of Mastery, Distilled for You",
     skills: ["Martial arts & strength coaching", "Vocal improvement coaching", "AI education & mentoring"],
     href: "/coaching",
   },
@@ -85,7 +87,7 @@ const domains = [
     pillar: "Mind",
     image: MIND_URL,
     icon: "🤝",
-    tagline: "Helping People Thrive",
+    tagline: "Real Help for Real People",
     skills: ["Independent support worker", "Emotional support & life assistance", "Problem-solving for vulnerable individuals"],
     href: "/human-support",
   },
@@ -95,7 +97,7 @@ const domains = [
     pillar: "Intelligence",
     image: AI_URL,
     icon: "🔥",
-    tagline: "Building Systems & Ventures",
+    tagline: "Build Systems. Create Ventures. Scale Impact.",
     skills: ["Grit & Groove Karaoke", "AI consulting & prompt products", "Future karaoke bar vision"],
     href: "/entrepreneurship",
   },
@@ -105,7 +107,7 @@ const domains = [
     pillar: "Voice",
     image: MUSIC_URL,
     icon: "✍️",
-    tagline: "Myth-Maker · Brand Architect",
+    tagline: "Turn Raw Experience Into Myth",
     skills: ["Songwriting & rap writing", "Personal branding & content creation", "Mythic identity (Rustwood)"],
     href: "/creativity",
   },
@@ -115,7 +117,7 @@ const domains = [
     pillar: "Mind",
     image: MIND_URL,
     icon: "🌌",
-    tagline: "Explorer of the Unseen",
+    tagline: "Explore What Lies Beyond the Visible",
     skills: ["Remote viewing exploration", "Meditation & consciousness study", "Energy systems & higher intelligence"],
     href: "/philosophy",
   },
@@ -134,6 +136,38 @@ const pillarColors: Record<string, string> = {
   Mind: "#a78bfa",
   Intelligence: "#34d399",
 };
+
+// ─── Achievement Stats ──────────────────────────────────────────────────────
+const achievements = [
+  { stat: "2×", label: "Australian ISKA Champion" },
+  { stat: "QLD", label: "ISKA Kickboxing Champion" },
+  { stat: "34+", label: "Years Coaching" },
+  { stat: "8", label: "Years Hypnotherapy" },
+  { stat: "2022", label: "AI Specialist Since" },
+  { stat: "25+", label: "Private Karaoke Events" },
+];
+
+// ─── Forge Coaching Pillars ─────────────────────────────────────────────────
+const forgePillars = [
+  {
+    title: "Body & Strength",
+    icon: "⚔️",
+    color: "#d4a843",
+    points: ["Martial arts conditioning", "Kettlebell & calisthenics programming", "Breathing & movement systems"],
+  },
+  {
+    title: "Mind & Confidence",
+    icon: "🧠",
+    color: "#a78bfa",
+    points: ["Hypnotherapy & mental conditioning", "Performance psychology", "Stress management & composure"],
+  },
+  {
+    title: "Intelligence & Systems",
+    icon: "🤖",
+    color: "#34d399",
+    points: ["AI tools & productivity systems", "Content creation workflows", "Business automation basics"],
+  },
+];
 
 // ─── Social Links ────────────────────────────────────────────────────────────
 const socials = [
@@ -201,14 +235,11 @@ function useScrollReveal() {
 function GeometricBg() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Hero background image */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{ backgroundImage: `url(${HERO_BG_URL})` }}
       />
-      {/* Radial gradient overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(8,11,18,0)_0%,_rgba(8,11,18,0.7)_60%,_rgba(8,11,18,0.95)_100%)]" />
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#080b12] to-transparent" />
     </div>
   );
@@ -226,11 +257,9 @@ function GoldDivider() {
 // ─── Domain Card ─────────────────────────────────────────────────────────────
 function DomainCard({ domain, index }: { domain: typeof domains[0]; index: number }) {
   const pillarColor = pillarColors[domain.pillar] || "#d4a843";
-  const isPlaceholder = domain.href === "#";
 
   const cardContent = (
     <>
-      {/* Card image */}
       <div className="relative h-40 overflow-hidden">
         <img
           src={domain.image}
@@ -250,10 +279,6 @@ function DomainCard({ domain, index }: { domain: typeof domains[0]; index: numbe
           {domain.pillar}
         </div>
         <div className="absolute bottom-3 left-4 text-2xl">{domain.icon}</div>
-        {isPlaceholder && (
-          <div className="absolute top-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase bg-[#080b12]/80 border border-[rgba(212,168,67,0.2)] text-[#8a9ab5]"
-            style={{ fontFamily: "'Raleway', sans-serif" }}>Coming Soon</div>
-        )}
       </div>
       <div className="p-5">
         <h3 className="text-sm font-bold mb-1 leading-tight" style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}>
@@ -275,104 +300,40 @@ function DomainCard({ domain, index }: { domain: typeof domains[0]; index: numbe
     </>
   );
 
-  if (!isPlaceholder) {
-    return (
-      <Link href={domain.href}>
-        <div
-          className="domain-card fade-up block group cursor-pointer"
-          style={{ transitionDelay: `${(index % 5) * 60}ms` }}
-        >
-          {cardContent}
-        </div>
-      </Link>
-    );
-  }
-
   return (
-    <div
-      className="domain-card fade-up block group"
-      style={{ transitionDelay: `${(index % 5) * 60}ms` }}
-    >
-      {/* Card image */}
-      <div className="relative h-40 overflow-hidden">
-        <img
-          src={domain.image}
-          alt={domain.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#141a28] via-[#141a28]/60 to-transparent" />
-        {/* Pillar badge */}
-        <div
-          className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase"
-          style={{
-            color: pillarColor,
-            border: `1px solid ${pillarColor}40`,
-            background: `${pillarColor}12`,
-            fontFamily: "'Raleway', sans-serif",
-          }}
-        >
-          {domain.pillar}
-        </div>
-        {/* Icon */}
-        <div className="absolute bottom-3 left-4 text-2xl">{domain.icon}</div>
-        {/* Coming soon badge */}
-        <div className="absolute top-3 left-3 px-2 py-0.5 text-[9px] font-bold tracking-widest uppercase bg-[#080b12]/80 border border-[rgba(212,168,67,0.2)] text-[#8a9ab5]"
-          style={{ fontFamily: "'Raleway', sans-serif" }}>
-          Coming Soon
-        </div>
-      </div>
-
-      {/* Card body */}
-      <div className="p-5">
-        <h3
-          className="text-sm font-bold mb-1 leading-tight"
-          style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}
-        >
-          {domain.title}
-        </h3>
-        <p
-          className="text-xs mb-3"
-          style={{ color: pillarColor, fontFamily: "'Raleway', sans-serif", fontWeight: 600, letterSpacing: "0.05em" }}
-        >
-          {domain.tagline}
-        </p>
-        <ul className="space-y-1">
-          {domain.skills.map((skill, i) => (
-            <li
-              key={i}
-              className="text-xs flex items-start gap-2"
-              style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
-            >
-              <span style={{ color: "#d4a843", marginTop: "2px", flexShrink: 0 }}>›</span>
-              {skill}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Bottom hover bar */}
+    <Link href={domain.href}>
       <div
-        className="h-0.5 w-0 group-hover:w-full transition-all duration-500"
-        style={{ background: `linear-gradient(90deg, ${pillarColor}, transparent)` }}
-      />
-    </div>
+        className="domain-card fade-up block group cursor-pointer"
+        style={{ transitionDelay: `${(index % 5) * 60}ms` }}
+      >
+        {cardContent}
+      </div>
+    </Link>
   );
 }
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Home() {
+  usePageMeta("Performance Coach & AI Strategist");
   useScrollReveal();
   const domainsRef = useRef<HTMLElement>(null);
+  const newsletterRef = useRef<HTMLElement>(null);
 
   function scrollToDomains() {
     domainsRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function scrollToNewsletter() {
+    newsletterRef.current?.scrollIntoView({ behavior: "smooth" });
   }
 
   return (
     <div className="min-h-screen" style={{ background: "#080b12", fontFamily: "'Raleway', sans-serif" }}>
       <RustwoodNav />
 
-      {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
         <GeometricBg />
 
@@ -408,8 +369,8 @@ export default function Home() {
             AARON ELLIS
           </h1>
 
-          {/* Brand name */}
-          <div className="flex items-center gap-3 mb-6">
+          {/* Brand name + tagline */}
+          <div className="flex items-center gap-3 mb-3">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#d4a843]" />
             <span
               className="text-sm tracking-[0.4em] uppercase"
@@ -420,7 +381,23 @@ export default function Home() {
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#d4a843]" />
           </div>
 
-          {/* Tagline */}
+          {/* Forged Capability tagline */}
+          <p
+            className="text-xs tracking-[0.5em] uppercase mb-6"
+            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 500 }}
+          >
+            Forged Capability
+          </p>
+
+          {/* Positioning statement */}
+          <p
+            className="text-sm md:text-base max-w-2xl mb-4 leading-relaxed"
+            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 400 }}
+          >
+            Multi-disciplinary performance coach and AI strategist helping people build real-world capability.
+          </p>
+
+          {/* Pillar line */}
           <p
             className="text-base md:text-lg max-w-xl mb-10 leading-relaxed"
             style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 400 }}
@@ -432,7 +409,7 @@ export default function Home() {
           </p>
 
           {/* Four Pillars */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
             {pillars.map((p) => (
               <div key={p.label} className="pillar-badge" style={{ color: pillarColors[p.label], borderColor: `${pillarColors[p.label]}40`, background: `${pillarColors[p.label]}0d` }}>
                 <span>{p.icon}</span>
@@ -441,8 +418,36 @@ export default function Home() {
             ))}
           </div>
 
+          {/* Dual CTAs */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-8">
+            <button
+              onClick={scrollToDomains}
+              className="px-8 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_24px_rgba(212,168,67,0.35)] hover:translate-y-[-2px]"
+              style={{
+                background: "linear-gradient(135deg, #d4a843, #8a6a1e)",
+                color: "#080b12",
+                fontFamily: "'Raleway', sans-serif",
+                border: "1px solid rgba(212,168,67,0.6)",
+              }}
+            >
+              Explore Domains
+            </button>
+            <button
+              onClick={scrollToNewsletter}
+              className="px-8 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:border-[#d4a843] hover:text-[#d4a843] hover:shadow-[0_0_16px_rgba(212,168,67,0.2)]"
+              style={{
+                background: "transparent",
+                color: "#8a9ab5",
+                fontFamily: "'Raleway', sans-serif",
+                border: "1px solid rgba(212,168,67,0.3)",
+              }}
+            >
+              Join the Rustwood Weekly
+            </button>
+          </div>
+
           {/* Archetypes row */}
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 mb-12">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             {["Warrior", "Creator", "Technologist", "Teacher", "Architect of Systems", "Voice Artist", "Mind Coach"].map((a) => (
               <span
                 key={a}
@@ -453,36 +458,12 @@ export default function Home() {
               </span>
             ))}
           </div>
-
-          {/* CTA */}
-          <button
-            onClick={scrollToDomains}
-            className="group flex flex-col items-center gap-2 transition-all duration-300"
-            style={{ background: "none", border: "none" }}
-          >
-            <span
-              className="text-xs tracking-[0.3em] uppercase"
-              style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
-            >
-              Explore Domains
-            </span>
-            <div
-              className="w-6 h-10 border-2 rounded-full flex items-start justify-center pt-1.5 group-hover:border-[#d4a843] transition-colors"
-              style={{ borderColor: "rgba(212,168,67,0.4)" }}
-            >
-              <div
-                className="w-1.5 h-3 rounded-full"
-                style={{
-                  background: "#d4a843",
-                  animation: "float-up 1.5s ease-in-out infinite alternate",
-                }}
-              />
-            </div>
-          </button>
         </div>
       </section>
 
-      {/* ── ABOUT AARON ──────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════════
+          ABOUT AARON
+      ══════════════════════════════════════════════════════════════════ */}
       <section className="py-24 px-4" style={{ background: "#080b12" }}>
         <div className="max-w-2xl mx-auto text-center fade-up">
           <p
@@ -499,20 +480,152 @@ export default function Home() {
           </h2>
           <div className="gold-divider mb-8"><div className="gold-divider-diamond" /></div>
           <p
-            className="text-base md:text-lg leading-relaxed"
+            className="text-base md:text-lg leading-relaxed mb-6"
             style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 400, maxWidth: "660px", margin: "0 auto" }}
           >
             Aaron Ellis — known through the Rustwood identity — has spent decades exploring the disciplines that shape human capability: martial arts, voice, mindset, technology, and creative expression. His work blends traditional training with modern tools, guiding people toward greater strength, clarity, and confidence. The Rustwood Sigil acts as a central emblem for these paths of mastery. From here, each domain reveals a different craft within that journey.
+          </p>
+          <p
+            className="text-sm md:text-base leading-relaxed"
+            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 400, maxWidth: "660px", margin: "0 auto", opacity: 0.85 }}
+          >
+            Whether you are looking to train your body, find your voice, sharpen your mind, or master modern technology — the Rustwood system offers coaching, digital products, and live experiences designed to help you become stronger, sharper, and more capable.
           </p>
           <div className="gold-divider mt-10"><div className="gold-divider-diamond" /></div>
         </div>
       </section>
 
-      {/* ── DOMAINS ──────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════════
+          ACHIEVEMENT STATS
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 px-4" style={{ background: "#0a0e18" }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {achievements.map((a, i) => (
+              <div
+                key={i}
+                className="fade-up text-center p-5"
+                style={{
+                  background: "#141a28",
+                  border: "1px solid rgba(212,168,67,0.12)",
+                  transitionDelay: `${i * 80}ms`,
+                }}
+              >
+                <div
+                  className="text-2xl md:text-3xl font-black mb-1"
+                  style={{ fontFamily: "'Cinzel', serif", color: "#d4a843" }}
+                >
+                  {a.stat}
+                </div>
+                <div
+                  className="text-[10px] tracking-widest uppercase leading-tight"
+                  style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+                >
+                  {a.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          RUSTWOOD FORGE COACHING
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="py-24 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-5xl mx-auto fade-up">
+          <div className="text-center mb-14">
+            <p
+              className="text-xs tracking-[0.4em] uppercase mb-4"
+              style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 700 }}
+            >
+              Flagship Programme
+            </p>
+            <h2
+              className="text-2xl md:text-4xl font-bold mb-3"
+              style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}
+            >
+              Rustwood Forge Coaching
+            </h2>
+            <p
+              className="text-sm tracking-[0.2em] uppercase mb-6"
+              style={{ color: "#4fc3f7", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+            >
+              The 8-Week Transformation Programme
+            </p>
+            <GoldDivider />
+            <p
+              className="mt-8 text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+              style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
+            >
+              Most coaches can help you get fit OR fix your mindset OR teach you tech. Aaron does all three — because real capability is not built in silos. This programme covers physical training, mindset work, confidence building, and AI productivity systems.
+            </p>
+          </div>
+
+          {/* Three pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {forgePillars.map((fp, i) => (
+              <div
+                key={i}
+                className="fade-up p-6 text-center"
+                style={{
+                  background: "#141a28",
+                  border: `1px solid ${fp.color}25`,
+                  transitionDelay: `${i * 100}ms`,
+                }}
+              >
+                <div className="text-3xl mb-4">{fp.icon}</div>
+                <h3
+                  className="text-sm font-bold mb-4 tracking-widest uppercase"
+                  style={{ fontFamily: "'Cinzel', serif", color: fp.color }}
+                >
+                  {fp.title}
+                </h3>
+                <ul className="space-y-2">
+                  {fp.points.map((point, j) => (
+                    <li
+                      key={j}
+                      className="text-xs flex items-center justify-center gap-2"
+                      style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
+                    >
+                      <span style={{ color: fp.color, flexShrink: 0 }}>›</span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Scarcity + CTA */}
+          <div className="text-center fade-up">
+            <p
+              className="text-xs tracking-widest uppercase mb-6"
+              style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+            >
+              Limited to 3–5 clients at a time
+            </p>
+            <a
+              href="mailto:completestrength@gmail.com?subject=Rustwood%20Forge%20Coaching%20Enquiry"
+              className="inline-block px-10 py-3.5 text-sm font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,168,67,0.4)] hover:translate-y-[-2px]"
+              style={{
+                background: "linear-gradient(135deg, #d4a843, #8a6a1e)",
+                color: "#080b12",
+                fontFamily: "'Raleway', sans-serif",
+                border: "1px solid rgba(212,168,67,0.6)",
+              }}
+            >
+              Enquire About Coaching
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          DOMAINS
+      ══════════════════════════════════════════════════════════════════ */}
       <section ref={domainsRef} className="py-24 px-4" style={{ background: "#080b12" }}>
         <div className="max-w-7xl mx-auto">
-
-          {/* Section header */}
           <div className="text-center mb-16 fade-up">
             <p
               className="text-xs tracking-[0.4em] uppercase mb-3"
@@ -531,11 +644,10 @@ export default function Home() {
               className="mt-6 text-sm max-w-2xl mx-auto leading-relaxed"
               style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
             >
-              Each domain below represents a pillar of Aaron's life's work. These pages are being built — click to explore as they come online.
+              Each domain below represents a forged discipline — decades of practice distilled into mastery. Click to explore.
             </p>
           </div>
 
-          {/* Cards grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {domains.map((domain, i) => (
               <DomainCard key={domain.id} domain={domain} index={i} />
@@ -544,7 +656,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── IDENTITY SUMMARY ─────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════════
+          NEWSLETTER — THE RUSTWOOD WEEKLY
+      ══════════════════════════════════════════════════════════════════ */}
+      <section ref={newsletterRef} className="py-24 px-4" style={{ background: "#0a0e18" }}>
+        <div className="max-w-3xl mx-auto fade-up">
+          <NewsletterSignup variant="full" />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          GRIT & GROOVE KARAOKE SPOTLIGHT
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="py-20 px-4" style={{ background: "#080b12" }}>
+        <div
+          className="max-w-4xl mx-auto fade-up relative overflow-hidden p-8 md:p-12"
+          style={{
+            background: "linear-gradient(135deg, rgba(20,26,40,0.95), rgba(15,20,32,0.9))",
+            border: "1px solid rgba(79,195,247,0.2)",
+            boxShadow: "0 0 40px rgba(79,195,247,0.08)",
+          }}
+        >
+          {/* Corner glow */}
+          <div
+            className="absolute top-0 right-0 w-48 h-48 pointer-events-none"
+            style={{ background: "radial-gradient(circle at top right, rgba(79,195,247,0.1), transparent 70%)" }}
+          />
+
+          <div className="relative flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-shrink-0 text-center">
+              <div className="text-5xl mb-3">🎤</div>
+              <div
+                className="text-[10px] tracking-widest uppercase font-bold"
+                style={{ color: "#4fc3f7", fontFamily: "'Raleway', sans-serif" }}
+              >
+                Live Events
+              </div>
+            </div>
+
+            <div className="flex-1 text-center md:text-left">
+              <h3
+                className="text-xl md:text-2xl font-bold mb-2"
+                style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}
+              >
+                Grit & Groove Karaoke
+              </h3>
+              <p
+                className="text-xs tracking-[0.3em] uppercase mb-4"
+                style={{ color: "#4fc3f7", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+              >
+                Where the Mic Tells the Story
+              </p>
+              <p
+                className="text-sm leading-relaxed mb-6"
+                style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
+              >
+                Private karaoke events with professional sound, curated playlists, and an atmosphere that brings people together. 25+ events and counting. Available for private bookings, corporate events, and venue partnerships.
+              </p>
+              <a
+                href="mailto:completestrength@gmail.com?subject=Grit%20%26%20Groove%20Karaoke%20Booking"
+                className="inline-block px-8 py-3 text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_24px_rgba(79,195,247,0.3)] hover:translate-y-[-2px]"
+                style={{
+                  background: "linear-gradient(135deg, #4fc3f7, #1a5f7a)",
+                  color: "#080b12",
+                  fontFamily: "'Raleway', sans-serif",
+                  border: "1px solid rgba(79,195,247,0.5)",
+                }}
+              >
+                Book an Event
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          IDENTITY SUMMARY + PILLARS
+      ══════════════════════════════════════════════════════════════════ */}
       <section className="py-20 px-4" style={{ background: "#0a0e18" }}>
         <div className="max-w-4xl mx-auto text-center fade-up">
           <GoldDivider />
@@ -574,9 +762,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── FOOTER ───────────────────────────────────────────────────────── */}
+      {/* ══════════════════════════════════════════════════════════════════
+          MEDIA & APPEARANCES (Placeholder)
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-3xl mx-auto text-center fade-up">
+          <p
+            className="text-xs tracking-[0.4em] uppercase mb-3"
+            style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 700 }}
+          >
+            Coming Soon
+          </p>
+          <h3
+            className="text-lg font-bold mb-4"
+            style={{ fontFamily: "'Cinzel', serif", color: "#f0ead8" }}
+          >
+            Media & Appearances
+          </h3>
+          <p
+            className="text-xs leading-relaxed"
+            style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", opacity: 0.7 }}
+          >
+            Podcast guest appearances, media features, and collaborations will be showcased here as they go live.
+          </p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          FOOTER
+      ══════════════════════════════════════════════════════════════════ */}
       <footer className="py-12 px-4" style={{ background: "#080b12", borderTop: "1px solid rgba(212,168,67,0.15)" }}>
         <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
+
+          {/* Compact newsletter */}
+          <div className="w-full mb-4">
+            <p
+              className="text-center text-xs tracking-widest uppercase mb-4"
+              style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+            >
+              Join the Rustwood Weekly
+            </p>
+            <NewsletterSignup variant="compact" />
+          </div>
+
+          <GoldDivider />
 
           {/* Logo small */}
           <img

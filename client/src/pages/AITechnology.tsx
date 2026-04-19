@@ -8,6 +8,8 @@
 import { useEffect } from "react";
 import RustwoodNav from "@/components/RustwoodNav";
 import RustwoodFooter from "@/components/RustwoodFooter";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import LeadMagnetCard from "@/components/LeadMagnetCard";
 
 // ─── Asset URLs ──────────────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -76,6 +78,7 @@ function AudienceTag({ icon, label }: { icon: string; label: string }) {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function AITechnology() {
+  usePageMeta("Artificial Intelligence & Technology");
   useScrollReveal();
 
   return (
@@ -414,6 +417,21 @@ export default function AITechnology() {
           >
             ✉ &nbsp; aiwizard@aaronellis.au
           </a>
+        </div>
+      </section>
+
+      {/* ── PRODUCT CTA ──────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-4xl mx-auto">
+          <LeadMagnetCard
+            type="paid"
+            title="The Prompt Forge Starter Pack"
+            description="50+ structured prompts for content creation, business planning, and creative projects. Built from Aaron's daily AI workflow."
+            price="$19–$29"
+            buttonText="Get the Pack"
+            accentColor="#34d399"
+            icon="⚡"
+          />
         </div>
       </section>
       <RustwoodFooter />

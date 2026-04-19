@@ -1,11 +1,12 @@
 /*
  * RUSTWOOD HUB — Shared Footer Component
  * Design: "Rustwood Sigil" — Dark Fantasy Codex
- * Social icons + back to hub link
+ * Social icons + newsletter + back to hub link
  * Used across all domain pages
  */
 
 import { Link } from "wouter";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 const LOGO_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -60,65 +61,81 @@ interface RustwoodFooterProps {
 export default function RustwoodFooter({ showBackToHub = true }: RustwoodFooterProps) {
   return (
     <footer
-      className="py-12 px-4 text-center"
+      className="py-12 px-4"
       style={{ background: "#080b12", borderTop: "1px solid rgba(212,168,67,0.1)" }}
     >
-      {showBackToHub && (
-        <Link href="/">
-          <div className="inline-flex flex-col items-center gap-2 cursor-pointer group mb-8">
-            <img
-              src={LOGO_URL}
-              alt="Rustwood"
-              className="w-12 h-12 object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-              style={{ filter: "drop-shadow(0 0 8px rgba(79,195,247,0.2))" }}
-            />
-            <span
-              className="text-xs tracking-widest uppercase"
-              style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
-            >
-              ← Back to Rustwood Hub
-            </span>
-          </div>
-        </Link>
-      )}
+      <div className="max-w-4xl mx-auto flex flex-col items-center gap-8">
+        {showBackToHub && (
+          <Link href="/">
+            <div className="inline-flex flex-col items-center gap-2 cursor-pointer group mb-4">
+              <img
+                src={LOGO_URL}
+                alt="Rustwood"
+                className="w-12 h-12 object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ filter: "drop-shadow(0 0 8px rgba(79,195,247,0.2))" }}
+              />
+              <span
+                className="text-xs tracking-widest uppercase"
+                style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
+              >
+                ← Back to Rustwood Hub
+              </span>
+            </div>
+          </Link>
+        )}
 
-      {/* Social Icons */}
-      <div className="flex items-center justify-center gap-4 mb-6">
-        {socials.map((s) => (
-          <a
-            key={s.name}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={s.name}
-            className="flex items-center justify-center w-10 h-10 transition-all duration-300"
-            style={{
-              color: "#8a9ab5",
-              border: "1px solid rgba(212,168,67,0.15)",
-              background: "rgba(212,168,67,0.04)",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = s.color;
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = s.color + "60";
-              (e.currentTarget as HTMLAnchorElement).style.background = s.color + "12";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.color = "#8a9ab5";
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(212,168,67,0.15)";
-              (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,67,0.04)";
-            }}
+        {/* Newsletter compact */}
+        <div className="w-full">
+          <p
+            className="text-center text-xs tracking-widest uppercase mb-4"
+            style={{ color: "#d4a843", fontFamily: "'Raleway', sans-serif", fontWeight: 600 }}
           >
-            {s.icon}
-          </a>
-        ))}
-      </div>
+            Join the Rustwood Weekly
+          </p>
+          <NewsletterSignup variant="compact" />
+        </div>
 
-      <p
-        className="text-xs"
-        style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
-      >
-        © {new Date().getFullYear()} Aaron Ellis · Rustwood
-      </p>
+        {/* Divider */}
+        <div className="gold-divider my-2"><div className="gold-divider-diamond" /></div>
+
+        {/* Social Icons */}
+        <div className="flex items-center justify-center gap-4">
+          {socials.map((s) => (
+            <a
+              key={s.name}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={s.name}
+              className="flex items-center justify-center w-10 h-10 transition-all duration-300"
+              style={{
+                color: "#8a9ab5",
+                border: "1px solid rgba(212,168,67,0.15)",
+                background: "rgba(212,168,67,0.04)",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = s.color;
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = s.color + "60";
+                (e.currentTarget as HTMLAnchorElement).style.background = s.color + "12";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color = "#8a9ab5";
+                (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(212,168,67,0.15)";
+                (e.currentTarget as HTMLAnchorElement).style.background = "rgba(212,168,67,0.04)";
+              }}
+            >
+              {s.icon}
+            </a>
+          ))}
+        </div>
+
+        <p
+          className="text-xs"
+          style={{ color: "#8a9ab5", fontFamily: "'Raleway', sans-serif" }}
+        >
+          © {new Date().getFullYear()} Aaron Ellis · Rustwood
+        </p>
+      </div>
     </footer>
   );
 }

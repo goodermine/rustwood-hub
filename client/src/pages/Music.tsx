@@ -8,6 +8,8 @@
 import { useEffect } from "react";
 import RustwoodNav from "@/components/RustwoodNav";
 import RustwoodFooter from "@/components/RustwoodFooter";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import LeadMagnetCard from "@/components/LeadMagnetCard";
 
 // ─── Asset URLs ──────────────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -71,6 +73,7 @@ function ServiceItem({ icon, text }: { icon: string; text: string }) {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function Music() {
+  usePageMeta("Music & Vocal Performance");
   useScrollReveal();
 
   return (
@@ -396,6 +399,20 @@ export default function Music() {
           >
             ✉ &nbsp; completestrength@gmail.com
           </a>
+        </div>
+      </section>
+
+      {/* ── PRODUCT CTA ──────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-4xl mx-auto">
+          <LeadMagnetCard
+            type="free"
+            title="Vocal Confidence Quickstart"
+            description="A free guide covering breathing technique, mic confidence, and overcoming performance nerves. Three steps to finding your voice."
+            buttonText="Get the Free Guide"
+            accentColor="#4fc3f7"
+            icon="🎵"
+          />
         </div>
       </section>
       <RustwoodFooter />

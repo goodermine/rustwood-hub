@@ -8,6 +8,8 @@
 import { useEffect } from "react";
 import RustwoodNav from "@/components/RustwoodNav";
 import RustwoodFooter from "@/components/RustwoodFooter";
+import { usePageMeta } from "@/hooks/usePageMeta";
+import LeadMagnetCard from "@/components/LeadMagnetCard";
 
 // ─── Asset URLs ──────────────────────────────────────────────────────────────
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
@@ -93,6 +95,7 @@ function PhilosophyPillar({ icon, text }: { icon: string; text: string }) {
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 export default function MartialArts() {
+  usePageMeta("Martial Arts & Physical Training");
   useScrollReveal();
 
   return (
@@ -381,6 +384,21 @@ export default function MartialArts() {
         </div>
       </section>
 
+
+      {/* ── PRODUCT CTA ──────────────────────────────────────────────── */}
+      <section className="py-16 px-4" style={{ background: "#080b12" }}>
+        <div className="max-w-4xl mx-auto">
+          <LeadMagnetCard
+            type="paid"
+            title="The Kettlebell Foundations Guide"
+            description="Aaron's approach to kettlebell training distilled into a practical 4-week programme. Covers grip, swing mechanics, pressing, and a full conditioning template."
+            price="$14.99"
+            buttonText="Get the Guide"
+            accentColor="#d4a843"
+            icon="🏋️"
+          />
+        </div>
+      </section>
       <RustwoodFooter />
     </div>
   );

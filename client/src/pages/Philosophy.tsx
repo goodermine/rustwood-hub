@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import RustwoodNav from "@/components/RustwoodNav";
 import RustwoodFooter from "@/components/RustwoodFooter";
 import { Link } from "wouter";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/rustwood-logo_306e987b.png";
 const HERO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310419663030843086/hJ7Zcj6oF9wJe9E5jZhTEC/philosophy-hero-SaZnLr7Uem5UiqECZqycfU.png";
@@ -28,6 +29,7 @@ function GoldDivider() {
 }
 
 export default function Philosophy() {
+  usePageMeta("Philosophy & Consciousness");
   useScrollReveal();
 
   return (
