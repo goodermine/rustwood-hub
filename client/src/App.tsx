@@ -15,11 +15,13 @@ import HumanSupport from "./pages/HumanSupport";
 import Entrepreneurship from "./pages/Entrepreneurship";
 import Creativity from "./pages/Creativity";
 import Philosophy from "./pages/Philosophy";
+import Subscribe from "./pages/Subscribe";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/subscribe"} component={Subscribe} />
       <Route path={"/martial-arts"} component={MartialArts} />
       <Route path={"/music"} component={Music} />
       <Route path={"/ai-technology"} component={AITechnology} />
